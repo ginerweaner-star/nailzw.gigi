@@ -1,0 +1,10 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Glam Set Studio | Kit Generator</title><link rel="stylesheet" href="styles.css"></head>
+<body>
+<nav><a class="logo" href="#"><span>✦</span> GLAM SET STUDIO</a><a href="admin.html">DASHBOARD</a></nav>
+<main class="kitpage"><small>STUDIO TOOL</small><h1>Create a sizing kit.</h1><p>Generate a unique kit code and a QR destination for printing on your package.</p>
+<div class="kitbox"><label>Kit code<input id="code" value="GSS-DEMO-4821"></label><label>Portal domain<input id="domain" value="https://YOUR-DOMAIN.com/portal"></label><button onclick="makeQR()">CREATE QR</button><div id="result" hidden><img id="qr"><p id="url"></p><a id="open" class="cta">TEST PORTAL</a></div></div>
+</main>
+<script>
+function makeQR(){const c=document.querySelector('#code').value.trim(),d=document.querySelector('#domain').value.trim().replace(/\/$/,'');const u=d+'?kit='+encodeURIComponent(c);document.querySelector('#url').textContent=u;document.querySelector('#open').href='index.html?kit='+encodeURIComponent(c);document.querySelector('#qr').src='demo_qr_GSS-DEMO-4821.png';document.querySelector('#result').hidden=false}
+</script></body></html>

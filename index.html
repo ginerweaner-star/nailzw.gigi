@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Glam Set Studio | Client Portal</title><link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<nav><a class="logo" href="#"><span>✦</span> GLAM SET STUDIO</a><a href="#form">SIZE MY SET</a></nav>
+<header class="hero">
+  <div>
+    <small>✦ CUSTOM PRESS-ON NAILS ✦</small>
+    <h1>Luxury nails.<br><i>Perfect fit.</i></h1>
+    <p>Your sizing kit was made to make your set fit like it was made just for you. Enter your sizing information below and send it back to the studio.</p>
+    <a class="cta" href="#form">START MY SIZING →</a>
+  </div>
+  <div class="hero-art"><div class="rings">✦ ♡ ✧</div><div class="nail-row"><b></b><b></b><b></b><b></b><b></b></div><span>HAND-FINISHED • CUSTOM • ONE OF ONE</span></div>
+</header>
+
+<main id="form">
+<div class="steps"><span class="active">01 SIZING</span><span>02 CONTACT</span><span>03 BILLING & SHIPPING</span></div>
+<form id="formEl">
+<section class="card">
+  <p class="pink">YOUR KIT</p><h2>Let's match your set.</h2>
+  <label>Sizing Kit / Order Code<input name="kitCode" placeholder="GSS-4821" required></label>
+  <p class="tip">This code is printed on your sizing kit. Your QR code can automatically fill this in for you.</p>
+</section>
+
+<section class="card">
+<p class="pink">01 · NAIL SIZES</p><h2>Enter your 10 sizes</h2><p class="tip">Use the number printed on each sizing nail.</p>
+<div class="hands"><div><h3>LEFT HAND</h3><div class="sizes">
+<label>Thumb<input name="lt" required></label><label>Index<input name="li" required></label><label>Middle<input name="lm" required></label><label>Ring<input name="lr" required></label><label>Pinky<input name="lp" required></label></div></div>
+<div><h3>RIGHT HAND</h3><div class="sizes">
+<label>Thumb<input name="rt" required></label><label>Index<input name="ri" required></label><label>Middle<input name="rm" required></label><label>Ring<input name="rr" required></label><label>Pinky<input name="rp" required></label></div></div></div>
+</section>
+
+<section class="card">
+<p class="pink">02 · CONTACT</p><h2>How can we reach you?</h2>
+<div class="grid2"><label>First name<input name="firstName" required></label><label>Last name<input name="lastName" required></label></div>
+<div class="grid2"><label>Email<input name="email" type="email" required></label><label>Phone<input name="phone" type="tel"></label></div>
+</section>
+
+<section class="card">
+<p class="pink">03 · BILLING & SHIPPING</p><h2>Where should your set go?</h2>
+<label>Shipping address<input name="shipAddress" required></label>
+<div class="grid3"><label>City<input name="shipCity" required></label><label>State<input name="shipState" required></label><label>ZIP<input name="shipZip" required></label></div>
+<label class="same"><input type="checkbox" id="same" checked> Billing address is the same as shipping</label>
+<div id="billing" hidden>
+<label>Billing address<input name="billAddress"></label>
+<div class="grid3"><label>City<input name="billCity"></label><label>State<input name="billState"></label><label>ZIP<input name="billZip"></label></div>
+</div>
+</section>
+
+<section class="card">
+<p class="pink">EXTRA DETAILS</p><h2>Make it yours.</h2>
+<label>Notes for your nail artist<textarea name="notes" placeholder="Length, shape, allergies/sensitivities, special requests, etc."></textarea></label>
+</section>
+<label class="confirm"><input type="checkbox" required> I confirm my nail sizes are correct.</label>
+<button class="submit">SUBMIT MY SIZING ✦</button>
+<div id="done" class="done" hidden><strong>You're all set! ✨</strong><br>Your sizing has been sent to Glam Set Studio.</div>
+</form>
+</main>
+<footer>GLAM SET STUDIO · CUSTOM NAIL SIZING PORTAL</footer>
+<script>
+const params=new URLSearchParams(location.search), code=params.get('kit');
+if(code) document.querySelector('[name=kitCode]').value=code;
+document.querySelector('#same').addEventListener('change',e=>document.querySelector('#billing').hidden=e.target.checked);
+document.querySelector('#formEl').addEventListener('submit',e=>{
+ e.preventDefault(); const data=Object.fromEntries(new FormData(e.target).entries());
+ data.status="Sizing Received"; data.createdAt=new Date().toISOString();
+ const all=JSON.parse(localStorage.getItem('gss_orders')||'[]'); all.push(data);
+ localStorage.setItem('gss_orders',JSON.stringify(all));
+ document.querySelector('#done').hidden=false; e.target.reset(); window.scrollTo({top:document.querySelector('#done').offsetTop-100,behavior:'smooth'});
+});
+</script>
+</body></html>

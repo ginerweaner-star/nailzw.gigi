@@ -1,0 +1,29 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Glam Set Studio | Dashboard</title><link rel="stylesheet" href="styles.css"></head>
+<body>
+<nav><a class="logo" href="#"><span>✦</span> GLAM SET STUDIO</a><a href="index.html">CLIENT PORTAL</a></nav>
+<main class="dashboard">
+<div class="dashhead"><div><small>PRIVATE STUDIO DASHBOARD</small><h1>Your orders.</h1></div><button id="csv" class="smallbtn">EXPORT CSV</button></div>
+<div class="stats"><div><b id="total">0</b><span>Total clients</span></div><div><b id="received">0</b><span>Sizing received</span></div><div><b id="ready">0</b><span>Ready to make</span></div></div>
+<div class="tools"><input id="search" placeholder="Search client, email, or kit code…"><select id="filter"><option>All statuses</option><option>Sizing Received</option><option>Ready to Make</option><option>In Production</option><option>Shipped</option></select></div>
+<div class="tablewrap"><table><thead><tr><th>Client</th><th>Kit</th><th>Sizes</th><th>Shipping</th><th>Status</th></tr></thead><tbody id="rows"></tbody></table></div>
+</main>
+<script>
+let orders=JSON.parse(localStorage.getItem('gss_orders')||'[]');
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function render(){
+ const q=document.querySelector('#search').value.toLowerCase(), f=document.querySelector('#filter').value;
+ const data=orders.filter(x=>(f==="All statuses"||x.status===f)&&`${x.firstName} ${x.lastName} ${x.email} ${x.kitCode}`.toLowerCase().includes(q));
+ document.querySelector('#total').textContent=orders.length;
+ document.querySelector('#received').textContent=orders.filter(x=>x.status==="Sizing Received").length;
+ document.querySelector('#ready').textContent=orders.filter(x=>x.status==="Ready to Make").length;
+ document.querySelector('#rows').innerHTML=data.map((x,i)=>`<tr><td><strong>${esc(x.firstName)} ${esc(x.lastName)}</strong><small>${esc(x.email)}</small></td><td>${esc(x.kitCode)}</td><td>${[x.lt,x.li,x.lm,x.lr,x.lp].join(' · ')}<br>${[x.rt,x.ri,x.rm,x.rr,x.rp].join(' · ')}</td><td>${esc(x.shipAddress)}<br>${esc(x.shipCity)}, ${esc(x.shipState)} ${esc(x.shipZip)}</td><td><select onchange="changeStatus(${orders.indexOf(x)},this.value)">${["Sizing Received","Ready to Make","In Production","Shipped"].map(s=>`<option ${x.status===s?'selected':''}>${s}</option>`).join('')}</select></td></tr>`).join('')||'<tr><td colspan="5" class="empty">No submissions yet. Submit the client form first.</td></tr>';
+}
+function changeStatus(i,v){orders[i].status=v;localStorage.setItem('gss_orders',JSON.stringify(orders));render()}
+document.querySelector('#search').oninput=render;document.querySelector('#filter').onchange=render;
+document.querySelector('#csv').onclick=()=>{
+ const headers=["First","Last","Email","Phone","Kit","Left Thumb","Left Index","Left Middle","Left Ring","Left Pinky","Right Thumb","Right Index","Right Middle","Right Ring","Right Pinky","Shipping","City","State","ZIP","Status","Notes"];
+ const lines=[headers,...orders.map(x=>[x.firstName,x.lastName,x.email,x.phone,x.kitCode,x.lt,x.li,x.lm,x.lr,x.lp,x.rt,x.ri,x.rm,x.rr,x.rp,x.shipAddress,x.shipCity,x.shipState,x.shipZip,x.status,x.notes])].map(r=>r.map(v=>`"${String(v??'').replaceAll('"','""')}"`).join(',')).join('\\n');
+ const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([lines],{type:'text/csv'}));a.download='glam-set-orders.csv';a.click();
+}; render();
+</script></body></html>
