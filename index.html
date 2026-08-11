@@ -1,220 +1,411 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Glam Set Studio | Client Portal</title><link rel="stylesheet" href="styles.css">
-<style>
-  .nail-section {
-    padding: 80px 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nailzw.Gigi | Custom Press-On Nails</title>
 
-  .section-heading {
-    text-align: center;
-    margin-bottom: 40px;
-  }
-
-  .section-heading span {
-    font-size: 11px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    opacity: .7;
-  }
-
-  .section-heading h2 {
-    font-size: clamp(32px, 6vw, 52px);
-    margin: 8px 0 12px;
-    letter-spacing: -1px;
-  }
-
-  .section-heading p {
-    max-width: 550px;
-    margin: 0 auto;
-    opacity: .75;
-  }
-
-  .nail-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 25px;
-  }
-
-  .nail-card {
-    overflow: hidden;
-    border-radius: 18px;
-    background: rgba(255,255,255,.08);
-    box-shadow: 0 12px 35px rgba(0,0,0,.12);
-    transition: transform .3s ease, box-shadow .3s ease;
-  }
-
-  .nail-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 18px 45px rgba(0,0,0,.18);
-  }
-
-  .nail-card img {
-    width: 100%;
-    height: 330px;
-    object-fit: cover;
-    display: block;
-  }
-
-  .nail-card-info {
-    padding: 20px;
-    text-align: center;
-  }
-
-  .nail-card-info h3 {
-    margin: 0 0 6px;
-    font-size: 20px;
-  }
-
-  .nail-card-info p {
-    margin: 0 0 16px;
-    opacity: .7;
-    font-size: 14px;
-  }
-
-  .nail-card-info button {
-    border: 0;
-    border-radius: 999px;
-    padding: 11px 20px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: transform .2s ease, opacity .2s ease;
-  }
-
-  .nail-card-info button:hover {
-    transform: scale(1.04);
-    opacity: .85;
-  }
-
-  .gallery-section {
-    max-width: 1300px;
-  }
-
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
-  }
-
-  .gallery-grid img {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    border-radius: 16px;
-    display: block;
-    transition: transform .3s ease;
-  }
-
-  .gallery-grid img:hover {
-    transform: scale(1.03);
-  }
-
-  @media (max-width: 800px) {
-    .nail-grid {
-      grid-template-columns: repeat(2, 1fr);
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
     }
 
-    .gallery-grid {
-      grid-template-columns: repeat(2, 1fr);
+    body {
+      font-family: Arial, sans-serif;
+      background: #fff;
+      color: #222;
     }
 
-    .nail-card img {
-      height: 260px;
-    }
-  }
-
-  @media (max-width: 520px) {
-    .nail-section {
-      padding: 55px 16px;
-    }
-
-    .nail-grid {
-      grid-template-columns: 1fr;
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,0.96);
+      border-bottom: 1px solid #eee;
+      padding: 18px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
-    .nail-card img {
-      height: 360px;
+    .logo {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: 1px;
     }
-  }
-</style></head>
+
+    nav a {
+      margin-left: 18px;
+      text-decoration: none;
+      color: #222;
+      font-weight: 600;
+    }
+
+    .hero {
+      min-height: 82vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 70px 20px;
+      background: linear-gradient(135deg, #fff, #fce8f2, #f5eefc);
+    }
+
+    .hero h1 {
+      font-size: clamp(45px, 9vw, 90px);
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      max-width: 650px;
+      margin: auto;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .buttons {
+      margin-top: 30px;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 14px 25px;
+      margin: 6px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 700;
+      background: #222;
+      color: white;
+    }
+
+    .button.light {
+      background: white;
+      color: #222;
+      border: 1px solid #222;
+    }
+
+    section {
+      padding: 80px 7%;
+      text-align: center;
+    }
+
+    section h2 {
+      font-size: 38px;
+      margin-bottom: 15px;
+    }
+
+    .subtitle {
+      max-width: 650px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+      color: #666;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 22px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .card {
+      padding: 30px 20px;
+      border: 1px solid #eee;
+      border-radius: 20px;
+      background: white;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+    }
+
+    .card h3 {
+      margin-bottom: 12px;
+    }
+
+    .sizing {
+      background: #faf6fb;
+    }
+
+    form {
+      max-width: 700px;
+      margin: auto;
+      text-align: left;
+      background: white;
+      padding: 30px;
+      border-radius: 22px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.07);
+    }
+
+    label {
+      display: block;
+      margin-top: 18px;
+      margin-bottom: 7px;
+      font-weight: 700;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      font-size: 15px;
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .submit {
+      width: 100%;
+      border: none;
+      margin-top: 25px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .gallery {
+      min-height: 250px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 20px;
+      background: #f5f5f5;
+      color: #777;
+    }
+
+    footer {
+      padding: 35px 20px;
+      text-align: center;
+      background: #222;
+      color: white;
+    }
+
+    @media (max-width: 650px) {
+      header {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      nav a {
+        margin: 0 7px;
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+
 <body>
-<nav><a class="logo" href="#"><span>✦</span> GLAM SET STUDIO</a><a href="#form">SIZE MY SET</a></nav>
-<header class="hero">
-  <div>
-    <small>✦ CUSTOM PRESS-ON NAILS ✦</small>
-    <h1>Luxury nails.<br><i>Perfect fit.</i></h1>
-    <p>Your sizing kit was made to make your set fit like it was made just for you. Enter your sizing information below and send it back to the studio.</p>
-    <a class="cta" href="#form">START MY SIZING →</a>
-  </div>
-  <div class="hero-art"><div class="rings">✦ ♡ ✧</div><div class="nail-row"><b></b><b></b><b></b><b></b><b></b></div><span>HAND-FINISHED • CUSTOM • ONE OF ONE</span></div>
-</header>
 
-<main id="form">
-<div class="steps"><span class="active">01 SIZING</span><span>02 CONTACT</span><span>03 BILLING & SHIPPING</span></div>
-<form id="formEl">
-<section class="card">
-  <p class="pink">YOUR KIT</p><h2>Let's match your set.</h2>
-  <label>Sizing Kit / Order Code<input name="kitCode" placeholder="GSS-4821" required></label>
-  <p class="tip">This code is printed on your sizing kit. Your QR code can automatically fill this in for you.</p>
-</section>
+<header>
+  <div class="logo">NAILZW.GIGI ✨
 
-<section class="card">
-<p class="pink">01 · NAIL SIZES</p><h2>Enter your 10 sizes</h2><p class="tip">Use the number printed on each sizing nail.</p>
-<div class="hands"><div><h3>LEFT HAND</h3><div class="sizes">
-<label>Thumb<input name="lt" required></label><label>Index<input name="li" required></label><label>Middle<input name="lm" required></label><label>Ring<input name="lr" required></label><label>Pinky<input name="lp" required></label></div></div>
-<div><h3>RIGHT HAND</h3><div class="sizes">
-<label>Thumb<input name="rt" required></label><label>Index<input name="ri" required></label><label>Middle<input name="rm" required></label><label>Ring<input name="rr" required></label><label>Pinky<input name="rp" required></label></div></div></div>
-</section>
+Connection interrupted. Waiting for the complete answer
 
-<section class="card">
-<p class="pink">02 · CONTACT</p><h2>How can we reach you?</h2>
-<div class="grid2"><label>First name<input name="firstName" required></label><label>Last name<input name="lastName" required></label></div>
-<div class="grid2"><label>Email<input name="email" type="email" required></label><label>Phone<input name="phone" type="tel"></label></div>
-</section>
 
-<section class="card">
-<p class="pink">03 · BILLING & SHIPPING</p><h2>Where should your set go?</h2>
-<label>Shipping address<input name="shipAddress" required></label>
-<div class="grid3"><label>City<input name="shipCity" required></label><label>State<input name="shipState" required></label><label>ZIP<input name="shipZip" required></label></div>
-<label class="same"><input type="checkbox" id="same" checked> Billing address is the same as shipping</label>
-<div id="billing" hidden>
-<label>Billing address<input name="billAddress"></label>
-<div class="grid3"><label>City<input name="billCity"></label><label>State<input name="billState"></label><label>ZIP<input name="billZip"></label></div>
-</div>
-</section>
 
-<section class="card">
-<p class="pink">EXTRA DETAILS</p><h2>Make it yours.</h2>
-<label>Notes for your nail artist<textarea name="notes" placeholder="Length, shape, allergies/sensitivities, special requests, etc."></textarea></label>
-</section>
-<label class="confirm"><input type="checkbox" required> I confirm my nail sizes are correct.</label>
-<button class="submit">SUBMIT MY SIZING ✦</button>
-<div id="done" class="done" hidden><strong>You're all set! ✨</strong><br>Your sizing has been sent to Glam Set Studio.</div>
-</form>
-</main>
-<footer>GLAM SET STUDIO · CUSTOM NAIL SIZING PORTAL</footer>
-<script>
-const params=new URLSearchParams(location.search), code=params.get('kit');
-if(code) document.querySelector('[name=kitCode]').value=code;
-document.querySelector('#same').addEventListener('change',e=>document.querySelector('#billing').hidden=e.target.checked);
-document.querySelector('#formEl').addEventListener('submit',e=>{
- e.preventDefault(); const data=Object.fromEntries(new FormData(e.target).entries());
- data.status="Sizing Received"; data.createdAt=new Date().toISOString();
- const all=JSON.parse(localStorage.getItem('gss_orders')||'[]'); all.push(data);
- localStorage.setItem('gss_orders',JSON.stringify(all));
- document.querySelector('#done').hidden=false; e.target.reset(); window.scrollTo({top:document.querySelector('#done').offsetTop-100,behavior:'smooth'});
-});
-</script>
-<!-- NAIL SETS -->
-<section id="nail-sets" class="nail-section">
-  <div class="section-heading">
-    <span>SHOP THE LOOK</span>
-    <h2>Nail Sets</h2>
-    <p>Luxury press-on nails made to give you the perfect fit.</p>
-  </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nailzw.Gigi | Custom Press-On Nails</title>
 
-  <div class="nail-grid"></body></html>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #fff;
+      color: #222;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,0.96);
+      border-bottom: 1px solid #eee;
+      padding: 18px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    nav a {
+      margin-left: 18px;
+      text-decoration: none;
+      color: #222;
+      font-weight: 600;
+    }
+
+    .hero {
+      min-height: 82vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 70px 20px;
+      background: linear-gradient(135deg, #fff, #fce8f2, #f5eefc);
+    }
+
+    .hero h1 {
+      font-size: clamp(45px, 9vw, 90px);
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      max-width: 650px;
+      margin: auto;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .buttons {
+      margin-top: 30px;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 14px 25px;
+      margin: 6px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 700;
+      background: #222;
+      color: white;
+    }
+
+    .button.light {
+      background: white;
+      color: #222;
+      border: 1px solid #222;
+    }
+
+    section {
+      padding: 80px 7%;
+      text-align: center;
+    }
+
+    section h2 {
+      font-size: 38px;
+      margin-bottom: 15px;
+    }
+
+    .subtitle {
+      max-width: 650px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+      color: #666;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 22px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .card {
+      padding: 30px 20px;
+      border: 1px solid #eee;
+      border-radius: 20px;
+      background: white;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+    }
+
+    .card h3 {
+      margin-bottom: 12px;
+    }
+
+    .sizing {
+      background: #faf6fb;
+    }
+
+    form {
+      max-width: 700px;
+      margin: auto;
+      text-align: left;
+      background: white;
+      padding: 30px;
+      border-radius: 22px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.07);
+    }
+
+    label {
+      display: block;
+      margin-top: 18px;
+      margin-bottom: 7px;
+      font-weight: 700;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      font-size: 15px;
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .submit {
+      width: 100%;
+      border: none;
+      margin-top: 25px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .gallery {
+      min-height: 250px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 20px;
+      background: #f5f5f5;
+      color: #777;
+    }
+
+    footer {
+      padding: 35px 20px;
+      text-align: center;
+      background: #222;
+      color: white;
+    }
+
+    @media (max-width: 650px) {
+      header {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      nav a {
+        margin: 0 7px;
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">NAILZW.GIGI ✨
